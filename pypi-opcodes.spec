@@ -4,7 +4,7 @@
 #
 Name     : pypi-opcodes
 Version  : 0.3.14
-Release  : 25
+Release  : 26
 URL      : https://files.pythonhosted.org/packages/df/2d/4d98a725b5e73ba3d8588fd415cc64120182ebec78e0695ecae7408a2d74/opcodes-0.3.14.tar.gz
 Source0  : https://files.pythonhosted.org/packages/df/2d/4d98a725b5e73ba3d8588fd415cc64120182ebec78e0695ecae7408a2d74/opcodes-0.3.14.tar.gz
 Summary  : Database of Processor Instructions/Opcodes
@@ -14,9 +14,6 @@ Requires: pypi-opcodes-license = %{version}-%{release}
 Requires: pypi-opcodes-python = %{version}-%{release}
 Requires: pypi-opcodes-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
-Provides: opcodes
-Provides: opcodes-python
-Provides: opcodes-python3
 BuildRequires : pypi(setuptools)
 
 %description
@@ -61,7 +58,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641464950
+export SOURCE_DATE_EPOCH=1650928957
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
