@@ -4,7 +4,7 @@
 #
 Name     : pypi-opcodes
 Version  : 0.3.14
-Release  : 34
+Release  : 35
 URL      : https://files.pythonhosted.org/packages/df/2d/4d98a725b5e73ba3d8588fd415cc64120182ebec78e0695ecae7408a2d74/opcodes-0.3.14.tar.gz
 Source0  : https://files.pythonhosted.org/packages/df/2d/4d98a725b5e73ba3d8588fd415cc64120182ebec78e0695ecae7408a2d74/opcodes-0.3.14.tar.gz
 Summary  : Database of Processor Instructions/Opcodes
@@ -15,6 +15,9 @@ Requires: pypi-opcodes-python = %{version}-%{release}
 Requires: pypi-opcodes-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 BuildRequires : pypi(setuptools)
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 .. image:: https://img.shields.io/github/license/Maratyszcza/Opcodes.svg
@@ -61,12 +64,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656392184
+export SOURCE_DATE_EPOCH=1672295198
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$FFLAGS -fno-lto "
-export FFLAGS="$FFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
@@ -83,7 +86,7 @@ popd
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-opcodes
-cp %{_builddir}/opcodes-0.3.14/license.rst %{buildroot}/usr/share/package-licenses/pypi-opcodes/75becd65c0fb973ddc34dd97fb419826c1c1183a
+cp %{_builddir}/opcodes-%{version}/license.rst %{buildroot}/usr/share/package-licenses/pypi-opcodes/75becd65c0fb973ddc34dd97fb419826c1c1183a || :
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
